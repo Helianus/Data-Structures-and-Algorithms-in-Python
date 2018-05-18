@@ -59,3 +59,14 @@ class LinkedList:
             count += 1 # traversaling the nodes
             lst = lst.get_Next() # go to next
         return count        
+    
+    # Search the linked list by given an item
+    def search_Item(self, item):
+        lst = self.head # start with the head
+        isFound = False # boolean to remember if we located the item
+        while lst and not isFound:
+            if lst.get_Data() == item: # if it located, isFound = true
+                isFound = True 
+            else:
+                lst = lst.get_Next() # if it is not, go to next
+        return isFound
