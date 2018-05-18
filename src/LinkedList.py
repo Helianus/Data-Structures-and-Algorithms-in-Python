@@ -45,7 +45,7 @@ class LinkedList:
             print("This linked list is an empty.")
             return False
         while lst:
-             print(str(lst.get_Data()), end=" ") # Print the linked
+             print(lst.get_Data(), end=" ") # Print the linked
              lst = lst.next # lst as next
 
     # Get size of the linkd list by traversaling
@@ -59,7 +59,7 @@ class LinkedList:
             count += 1 # traversaling the nodes
             lst = lst.get_Next() # go to next
         return count        
-    
+
     # Search the linked list by given an item
     def search_Item(self, item):
         lst = self.head # start with the head
