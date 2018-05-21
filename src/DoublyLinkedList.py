@@ -52,7 +52,7 @@ class DLinkedList:
             self.head = node
         else:
             node = Node(data)
-            node.set_Prev(node)
+            self.head.set_Prev(node)
             node.set_Next(self.head)
             self.head = node
         self.size += 1
