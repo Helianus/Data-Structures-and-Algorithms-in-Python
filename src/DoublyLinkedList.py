@@ -39,6 +39,7 @@ class DLinkedList:
     # Initialize the head of the doubly linked list
     def __init__(self):
         self.head = None # head as null
+        self.size = 0 # length of doubly linked list
     
     # Insert data into the head of the doubly linked list
     def insert_Head(self, data):
@@ -54,6 +55,7 @@ class DLinkedList:
             self.head.set_Prev(node)
             node.set_Next(self.head)
             self.head = node
+        self.size += 1
         
     # Print the doubly linked list
     def display_list(self):
@@ -64,3 +66,7 @@ class DLinkedList:
         while curr:
             print(str(curr.get_Data()), end=" ")
             curr = curr.next
+
+    # Get the size of the linked list
+    def get_Size(self):
+        return self.size
