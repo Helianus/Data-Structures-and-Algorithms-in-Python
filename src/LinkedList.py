@@ -37,6 +37,7 @@ class LinkedList:
         node = Node(data) # Assign data to node
         node.set_Next(self.head) # Set old head to be next
         self.head = node # Assign new node to be the head of the Node
+        del node
 
     # Print the Linke list
     def display(self):
@@ -45,7 +46,7 @@ class LinkedList:
             print("This linked list is an empty.")
             return False
         while lst:
-             print(lst.get_Data(), end=" ") # Print the linked
+             print(str(lst.get_Data()), end=" ") # Print the linked
              lst = lst.next # lst as next
 
     # Get size of the linkd list by traversaling
@@ -70,3 +71,21 @@ class LinkedList:
             else:
                 lst = lst.get_Next() # if it is not, go to next
         return isFound
+
+    # Delete the given item in the linked list
+    def delete_Item(self, item):
+        lst = self.head # start with the head
+        pre = None # the previous node
+        isFound = False # boolean to remember if we located the item
+        while not isFound:
+            if lst.get_Data() == item: # if it located, isFound = true
+                isFound = True
+            else:
+                pre = lst # let pre moving into the current node
+                lst = lst.get_Next() # let lst moving into the next node
+       # If the previous node is null
+        if pre is None:
+            self.head = lst.get_Next() # Moving head into next node
+        else:
+            pre.set_Next(lst.get_Next()) # Linked the next node to the previous one (ignore the current node)
+     
