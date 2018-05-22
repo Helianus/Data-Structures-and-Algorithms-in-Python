@@ -59,14 +59,28 @@ class DLinkedList:
         
     # Print the doubly linked list
     def display_list(self):
-        curr = self.head
-        if curr is None:
+        lst = self.head
+        if lst is None:
             print("This doubly linked list is empty.")
             return False
-        while curr:
-            print(str(curr.get_Data()), end=" ")
-            curr = curr.next
+        while lst:
+            print(str(lst.get_Data()), end=" ")
+            lst = lst.next
 
     # Get the size of the linked list
+    # size will be called in insert functions automatically
+    # the time complexity is O(1)
     def get_Size(self):
         return self.size
+
+    # Insert data into the tail of the doubly linked list
+    def insert_Tail(self, data):
+        node = Node(data)
+        lst = self.head # start as head
+        # Go throngh the linkd list while the node has next
+        while lst.get_Next() is not None:
+            lst = lst.get_Next()
+        lst.set_Next(node) # insert the node
+        node.set_Prev(lst) # link with previous node
+        self.size += 1
+  
