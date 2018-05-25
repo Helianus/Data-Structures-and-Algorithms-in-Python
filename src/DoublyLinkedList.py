@@ -39,6 +39,7 @@ class DLinkedList:
     # Initialize the head of the doubly linked list
     def __init__(self):
         self.head = None # head as null
+        self.tail = None # tail as null
         self.size = 0 # length of doubly linked list
     
     # Insert data into the head of the doubly linked list
@@ -47,11 +48,12 @@ class DLinkedList:
         # If the head is null, let node to be the head
         # If the head is not null, let node to be the previous one
         # and let original head to be the next node
+        node = Node(data)
+
         if self.head is None: 
-            node = Node(data)
             self.head = node
+            self.tail = node
         else:
-            node = Node(data)
             self.head.set_Prev(node)
             node.set_Next(self.head)
             self.head = node
@@ -76,11 +78,29 @@ class DLinkedList:
     # Insert data into the tail of the doubly linked list
     def insert_Tail(self, data):
         node = Node(data)
-        lst = self.head # start as head
-        # Go throngh the linkd list while the node has next
-        while lst.get_Next() is not None:
-            lst = lst.get_Next()
-        lst.set_Next(node) # insert the node
-        node.set_Prev(lst) # link with previous node
+        if self.tail is None:
+            self.head = node
+            self.tail = node
+        else:
+            self.tail.set_Next(node)
+            node.set_Prev(self.tail)
+            self.tail = node
         self.size += 1
-  
+    
+ # Delete the given item in the linked list
+    def delete_Item(self, item):
+        lst = self.head # start with the head
+        pre = None # the previous node
+        isFound = False # boolean to remember if we located the item
+        while not isFound:
+            if lst.get_Data() == item: # if it located, isFound = true
+                isFound = True
+            else:
+                pre = lst # let pre moving into the current node
+                lst = lst.get_Next() # let lst moving into the next node
+       # If the previous node is null
+        if pre is None:
+            self.head = lst.get_Next() # Moving head into next node
+        else:
+            pre.set_Next(lst.get_Next()) # Linked the next node to the previous one (ignore the current node)
+        self.size -= 1    
