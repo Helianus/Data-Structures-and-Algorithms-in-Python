@@ -14,7 +14,7 @@ class Node:
         return self.data
     
     # Get the previous data of the node
-    def get_Prev(self, prev):
+    def get_Prev(self):
         return self.prev
     
     # Get the next data of the node
@@ -87,10 +87,10 @@ class DLinkedList:
             self.tail = node
         self.size += 1
     
- # Delete the given item in the linked list
+    # Delete the given item in the linked list
     def delete_Item(self, item):
         lst = self.head # start with the head
-        pre = None # the previous node
+        pre = lst.get_Prev() # the previous node
         isFound = False # boolean to remember if we located the item
         while not isFound:
             if lst.get_Data() == item: # if it located, isFound = true
@@ -104,3 +104,21 @@ class DLinkedList:
         else:
             pre.set_Next(lst.get_Next()) # Linked the next node to the previous one (ignore the current node)
         self.size -= 1    
+         
+    # Reverse the doubly linked list and finally display it
+    def reverse_List(self):
+        
+        # Swap the head and tail
+        temp = self.head # store the head of the list
+        self.head = self.tail # swap head and tail
+        self.tail = temp
+        lst = self.head # current node as head
+
+        # Swap each node's prev and next
+        while lst is not None:
+            prevTemp = lst.get_Prev()
+            lst.set_Prev(lst.get_Next())
+            lst.set_Next(prevTemp)
+            lst = lst.get_Next() # keep going
+        
+        self.display_list()
