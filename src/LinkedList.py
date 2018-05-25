@@ -1,16 +1,21 @@
-# A Single Linked list 
+# A doubly linked list 
 
 # Node object
 class Node:
 
     # Initialize the node
     def __init__(self, data):
-        self.data = data # head's data
-        self.next = None # next as null
+        self.prev = None # previous node as null
+        self.data = data # current node
+        self.next = None # next node as null
     
-    # Gets data of the node
+     # Gets data of the node
     def get_Data(self):
         return self.data
+    
+    # Get the previous data of the node
+    def get_Prev(self, prev):
+        return self.prev
     
     # Get the next data of the node
     def get_Next(self):
@@ -20,59 +25,69 @@ class Node:
     def set_Data(self, newData):
         self.data = newData
     
+    # Set the prev of the node
+    def set_Prev(self, newPrev):
+        self.prev = newPrev
+    
     # Set the next data of the node
     def set_Next(self, newNext):
         self.next = newNext
 
-
-# Linked list object
-class LinkedList:
+# Doubly linked list object
+class DLinkedList:
     
-    # Initialize the head of linked list
+    # Initialize the head of the doubly linked list
     def __init__(self):
         self.head = None # head as null
+        self.tail = None # tail as null
+        self.size = 0 # length of doubly linked list
+    
+    # Insert data into the head of the doubly linked list
+    def insert_Head(self, data):
+        
+        # If the head is null, let node to be the head
+        # If the head is not null, let node to be the previous one
+        # and let original head to be the next node
+        node = Node(data)
 
-    # Insert data into the head of the linkd list
-    def insert_head(self, data):
-        node = Node(data) # Assign data to node
-        node.set_Next(self.head) # Set old head to be next
-        self.head = node # Assign new node to be the head of the Node
-        del node
-
-    # Print the Linke list
-    def display(self):
-        lst = self.head # start with the head
-        if lst is None: # if the head is none, return False
-            print("This linked list is an empty.")
-            return False
-        while lst:
-             print(str(lst.get_Data()), end=" ") # Print the linked
-             lst = lst.next # lst as next
-
-    # Get size of the linkd list by traversaling
-    def get_Size(self):
-        lst = self.head # strat with the head
-        count = 0 # count the nodes
+        if self.head is None: 
+            self.head = node
+            self.tail = node
+        else:
+            self.head.set_Prev(node)
+            node.set_Next(self.head)
+            self.head = node
+        self.size += 1
+        
+    # Print the doubly linked list
+    def display_list(self):
+        lst = self.head
         if lst is None:
-            print("This linked list is an empty.")
+            print("This doubly linked list is empty.")
             return False
         while lst:
-            count += 1 # traversaling the nodes
-            lst = lst.get_Next() # go to next
-        return count        
+            print(str(lst.get_Data()), end=" ")
+            lst = lst.next
 
-    # Search the linked list by given an item
-    def search_Item(self, item):
-        lst = self.head # start with the head
-        isFound = False # boolean to remember if we located the item
-        while lst and not isFound:
-            if lst.get_Data() == item: # if it located, isFound = true
-                isFound = True 
-            else:
-                lst = lst.get_Next() # if it is not, go to next
-        return isFound
+    # Get the size of the linked list
+    # size will be called in insert functions automatically
+    # the time complexity is O(1)
+    def get_Size(self):
+        return self.size
 
-    # Delete the given item in the linked list
+    # Insert data into the tail of the doubly linked list
+    def insert_Tail(self, data):
+        node = Node(data)
+        if self.tail is None:
+            self.head = node
+            self.tail = node
+        else:
+            self.tail.set_Next(node)
+            node.set_Prev(self.tail)
+            self.tail = node
+        self.size += 1
+    
+ # Delete the given item in the linked list
     def delete_Item(self, item):
         lst = self.head # start with the head
         pre = None # the previous node
@@ -88,4 +103,4 @@ class LinkedList:
             self.head = lst.get_Next() # Moving head into next node
         else:
             pre.set_Next(lst.get_Next()) # Linked the next node to the previous one (ignore the current node)
-     
+        self.size -= 1    
