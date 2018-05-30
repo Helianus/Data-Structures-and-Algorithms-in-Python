@@ -7,7 +7,7 @@
 # if this element is less than next element
 # then swap them
 def insertion_Sort(lst):
-    for i in range(1, len(lst)):            # first read from 1 to n
+    for i in range(1, len(lst)):            # first read from 1 to n - 1
         print(lst)                          # print sorting processes
         cur = lst[i]                        # current element used to be inserted
         j = i                               # second read to find correct index j for current 
