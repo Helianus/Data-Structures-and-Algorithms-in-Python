@@ -10,7 +10,7 @@ def insertion_Sort(lst):
     for i in range(1, len(lst)):            # first read from 1 to n-1
         print(lst)                          # print sorting processes
         cur = lst[i]                        # current element used to be inserted
-        j = i- 1                            # second read to find correct index j for current 
+        j = i - 1                           # second read to find correct index j for current 
         while j >= 0 and cur < lst[j]:      # subsequence lst[j] 
              lst[j + 1] = lst[j]            # swap the element and its front
              j -= 1                         # read from back to head
