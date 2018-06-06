@@ -88,3 +88,14 @@ class LinkedList:
             self.head = lst.get_Next() # Moving head into next node
         else:
             pre.set_Next(lst.get_Next()) # Linked the next node to the previous one (ignore the current node)
+
+    def reverse_List(self):
+        prev = None
+        curr = self.head
+        while curr is not None:
+            next = curr.get_Next()
+            curr.set_Next(prev)
+            prev = curr
+            curr = next
+        self.head = prev
+        self.display()
