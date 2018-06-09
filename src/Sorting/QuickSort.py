@@ -10,7 +10,7 @@ def quick_Sort(lst, first, last):
         return
     pivot = lst[last]                               # last element of range is pivot
     lo = first                                      # scan from first to last
-    hi = last - 1                                   # scan from last to first: "-1" is because of pivot
+    hi = last - 1                                   # scan from last to first
     while lo <= hi:
         while lo <= hi and lst[lo] < pivot:         # scan until reaching value >= pivot
             lo += 1
